@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import MyModel
+
+from .models import Post, Article
 
 class PostSerializer(serializers.ModelSerializer):
 
@@ -8,5 +9,12 @@ class PostSerializer(serializers.ModelSerializer):
     image_url = serializers.ImageField(required=False)
 
     class Meta:
-        model = MyModel
+        model = Post
         fields = ['id', 'user', 'user_id', 'title', 'description', 'image_url']
+
+class ArticleSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(default=serializers.CurrentUserDefault())
+    image_url = serializers.ImageField(required=False)
+    class Meta:
+        model = Article
+        fields = "__all__"
