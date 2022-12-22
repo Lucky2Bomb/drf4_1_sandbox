@@ -21,14 +21,21 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from game.views import GameAPIList, GameAPIUpdate, GameAPIDestroy
-
+from files.views import ArticleAPIList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/session-auth/', include('rest_framework.urls')),
+    
+    
     path('api/v1/game/', GameAPIList.as_view()),
     path('api/v1/game/<int:pk>/', GameAPIUpdate.as_view()),
     path('api/v1/game/<int:pk>/delete', GameAPIDestroy.as_view()),
+    
+    
+    path('api/v1/article/', ArticleAPIList.as_view()),
+    
+    
     path('api/v1/auth/', include('djoser.urls')),
     re_path(r'^auth/', include('djoser.urls.authtoken')),
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
