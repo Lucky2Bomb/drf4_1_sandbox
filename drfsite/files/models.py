@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -17,5 +18,9 @@ class Post(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=64)
     description = models.TextField()
-    image_url = models.ImageField(upload_to=upload_to, null=True, max_length=256)
+    image = models.ImageField(
+        upload_to=upload_to, null=True, max_length=256)
+    # video = models.FileField(
+    #     upload_to=upload_to, null=True, max_length=256, validators=[image_size])
+
     user = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
